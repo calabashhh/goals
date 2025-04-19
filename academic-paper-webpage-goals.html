@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Paper - Geography and Environmental Studies</title>
+    <style>
+        :root {
+            --primary-color: #3a5a78;
+            --secondary-color: #f4f4f4;
+            --text-color: #333;
+            --accent-color: #6c9cb0;
+            --sidebar-width: 220px;
+            --author-color: #6c9cb0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-style: italic;
+            font-size: 1rem;
+        }
+        
+        header p:last-child {
+            font-style: normal;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            color: var(--author-color);
+            font-weight: 500;
+        }
+        
+        .container {
+            display: flex;
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--secondary-color);
+            padding: 2rem 1rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+        }
+        
+        .sidebar h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .sidebar a {
+            text-decoration: none;
+            color: var(--text-color);
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        
+        .sidebar a:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .sidebar a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 2rem;
+            max-width: calc(100% - var(--sidebar-width));
+        }
+        
+        .paper-section {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 2rem;
+        }
+        
+        .paper-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        
+        blockquote {
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            background-color: var(--secondary-color);
+            font-style: italic;
+        }
+        
+        .references {
+            margin-top: 2rem;
+        }
+        
+        .references h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        
+        .references ul {
+            list-style: none;
+        }
+        
+        .references li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            text-indent: -2rem;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        /* Progress indicator for reading */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: var(--accent-color);
+            width: 0%;
+        }
+        
+        /* Active section indicator */
+        .sidebar .active-indicator {
+            width: 4px;
+            background-color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            transition: top 0.3s ease, height 0.3s ease;
+        }
+        
+        /* Mobile responsiveness */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+            
+            .content {
+                max-width: 100%;
+                padding: 1.5rem;
+            }
+            
+            header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <header>
+        <h1>Geography and Environmental Studies</h1>
+        <p>A Synthesis of Academic Goals and Practical Applications</p>
+        <p>By Alex Riepl Broz</p>
+    </header>
+    
+    <div class="container">
+        <nav class="sidebar">
+            <h2>Navigation</h2>
+            <div class="active-indicator" id="activeIndicator"></div>
+            <ul>
+                <li><a href="#introduction" class="nav-link">Introduction</a></li>
+                <li><a href="#practical-approach" class="nav-link">Practical Approach</a></li>
+                <li><a href="#theoretical-foundation" class="nav-link">Theoretical Foundation</a></li>
+                <li><a href="#program-goals" class="nav-link">Program Goals</a></li>
+                <li><a href="#references" class="nav-link">References</a></li>
+            </ul>
+        </nav>
+        
+        <main class="content">
+            <section id="introduction" class="paper-section">
+                <h2>Introduction</h2>
+                <p>Academically I come to the field of Geography and Environmental Studies from the perspective of a historian with a distinct anthropological and humanistic focus. My BA is in history however my thesis involved a hand drawn detailed illustrative map depicting Caesar's Gallic Wars text. Throughout my academic career both in undergrad and in this grad program it has vexed me that I wasn't born a hundred years earlier when I could have spent my professional life hand drawing giant maps, carefully tracing out contour lines, delicately arranging and hand lettering names and labels, using watercolors and bright inks to highlight embellish.</p>
+                <p>Technology and labor, time and money have transformed the work of making maps and by extension part of the <em>doing</em> of geography. While much of the technological production of geographic insight and analysis done in the field has changed materially towards further automated and digital means, this <em>doing</em> aspect has always been my major goal in the pursuit of this program. This focus within this program for me and has guided my selection of this program and guided both my choices in classes to take but also in projects to pursue within each class.</p>
+            </section>
+            
+            <section id="practical-approach" class="paper-section">
+                <h2>Practical Approach</h2>
+                <p>I have tried whenever possible to take a practical approach to my studies and the goals of this program. Making maps has been a means towards this end, I am also firmly grounded in the understanding of the map as a tool and means for communication. This twinned desire to learn the art of making modern maps while also being determined to gain the skills to utilize modern technology towards this same end. This practical bent is what has served as my guidepost as I have waded through the academic morass (Pattison,1964) that is the study of geography (See Piece 1). Without this guidance and adherence to these fixed and important goals, I would not have been able to be as successful in this program as I feel that I have been.</p>
+                <p>This is not at all a dismissal of the academic import of this degree or program, rather for me it is something of a synthesis. Much of the theoretical basis for my approach to making maps and to the doing of geographic work flows through understandings and questions first developed during my undergraduate program some few decades prior. I was very much interested and curious about the phenomenological production of space (Lefebre, H. 1974/1991) and investigation into the nature of small things and the creation/representation of landscapes in miniature.</p>
+                <p>Referencing container gardens in traditional East-Asian cultural traditions depicting or recalling miniature famous landscapes, Stein (1987/1990, p. 52) writes "...reducing the whole thing in size, making it manageable, accessible to handling---this raises it from the level of imitative reality and puts it in the domain of the only true reality: mythical space". This persistent acknowledgment of this fundamental reality must inform any understanding of what a map is and how it is made and how it is read. Surely a practical approach to the subject matter and a goal dedicated to acquiring the technical skills to use and master throughout this program is anathema to this root basis?</p>
+            </section>
+            
+            <section id="theoretical-foundation" class="paper-section">
+                <h2>Theoretical Foundation</h2>
+                <p>Surely not; for even deep in the fundamental truths of any map making venture, no matter how technologically advanced and mathematically precise recognizes the truth than any depiction of the three dimensional surface of the earth onto any two dimensional surface (whether paper or digital) must contain distortions: in size, in angle, in shape, orientation. If that paradox were not enough how can we possibly contend with the massiveness (on so many levels) of the Earth itself as a celestial body as it related to our own human sized bodies? Any reliance too heavily on a strictly technological approach to place is bound to prove a feeble structure the more weight is placed on it. To briefly quote that poet of Geology - McPhee (1981)</p>
+                
+                <blockquote>
+                    "The poles of the earth have wandered. The equator has apparently moved. The continents, perched on their plates, ...have been carried so very far and to be going in so many directions that it seems an act of almost pure hubris to assert that some landmark of our world is fixed..."
+                </blockquote>
+                
+                <p>So it is the same with any of our sophisticated statistical geographic tools. Without a human interpretation the ellipses, color shades, and polygons are just that.</p>
+                
+                <p>These humanistic tendencies however require a pairing with the bodily labor of our practical approach. "Sensory organs and experiences enable human beings to have their strong feeling for space and for spatial qualities" (Tuan, 1977, p. 12). Yet what other way could we relate to the space and world around us but through a type of synthesis. "Technology is the expression of (hu)man's working relationship with the natural world, the point at which environment and society meet and shape each other" (Elvin, 1973).</p>
+                
+                <p>Now that we are firmly rooted in this theoretical and practical foundation much of the choices of the portfolio I hope should become clearer. The influences of Yi-fu Tuan show up in the focus on the phenomenology of moving through space as is highlighted in Pieces 3 and 9. The inquiry into regionality first explored through the essays by Skinner (1977) is a strong influence on the direction and make-up of Pieces 4, 5, 6, and 8. Certainly the practicality goals of this program are reflected all over the portfolio but are highlighted in the inter-personal and inter-disciplinary roots of Pieces 2 and 7.</p>
+            </section>
+            
+            <section id="program-goals" class="paper-section">
+                <h2>Program Goals</h2>
+                <p>The program goals and objectives as outlined are understood as to be reflective of the comfortably interdisciplinary nature of the field of Geography and Environmental Studies. This interdisciplinary approach fits well in with the background of the author as well as my goals for the program.</p>
+                
+                <p>While the knowledge of the field is quite important, I believe I came to this program with strong understanding and appreciation of the knowledge base underlying this type of Geographical and Environmental program. My goals in this area were precise and adhered tightly to the practical goals I had set for myself. The Tools of Inquiry program goal was for me the most important and more all encompassing through which all other goals needed to fit through. The tools studied, learned, and some mastered - though not always digital -- did place a huge emphasis on technical know-how and wielding powerful and complex programs and techniques. Relevance, as a goal of the program was one which like Knowledge I had precise goals. So many of the interests underlying the projects in this program flowed through a deep concern with how the work and projects and learned skills related to the "real" world. Persistent themes in this work which relate to this goal include a concern for the human, the experiential, the concern for promoting human connection and understanding across and throughout our world.</p>
+                
+                <p>These impulses of course also touch on the goal of communication, which like the goal of Tools stand like two tent poles among the other goals in their shared depth and breadth. As asserted earlier maps and by extension GIS work is viewed, valued and interpreted as a means and tool of communication and thus this goal infuses most all projects and endeavors. The final goal of professionalism, is a unifying goal of this program. It highlights the practicality which is intended to illuminate the way forward through this program and beyond.</p>
+            </section>
+            
+            <section id="references" class="paper-section references">
+                <h2>References</h2>
+                <ul>
+                    <li>Elvin, M., (1973). The Pattern of the Chinese Past. Stanford University Press.</li>
+                    <li>Herodotus (2007) The Landmark Herodotus: The Histories. (Purvis, A. Trans.) Anchor Books.</li>
+                    <li>Lefebvre, H. (1991). The Production of Space. (Nicholson-Smith, D., Trans.) Blackwell Publishing. (Original work published 1974)</li>
+                    <li>Pattinson, W. (1964). The Four Traditions of Geography. <em>Journal of Geography, 63(5)</em> 211-216.</li>
+                    <li>McPhee, J. (1981). Annals of the former world. Farrar, Straus and Giroux.</li>
+                    <li>Skinner, G., (1977). The City in Late Imperial China. Stanford University Press.</li>
+                    <li>Stein, R. (1990) The world in Miniature: Container Gardens and Dwellings in Far Eastern Religious Thought. (Brooks, P., Trans.) Stanford University Press. (Original work published 1987)</li>
+                    <li>Tuan, Y., (1977) Space and Place. University of Minnesota Press.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 - Alex Riepl Broz - Geography and Environmental Studies</p>
+    </footer>
+    
+    <script>
+        // Progress bar functionality
+        window.onscroll = function() {
+            updateProgressBar();
+            highlightActiveSection();
+        };
+        
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        }
+        
+        // Active section highlighting
+        function highlightActiveSection() {
+            const sections = document.querySelectorAll('.paper-section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const indicator = document.getElementById('activeIndicator');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                    
+                    // Position the indicator
+                    const activeLink = document.querySelector('.nav-link.active');
+                    if (activeLink) {
+                        indicator.style.top = activeLink.offsetTop + 'px';
+                        indicator.style.height = activeLink.offsetHeight + 'px';
+                    }
+                }
+            });
+        }
+        
+        // Initial highlight
+        document.addEventListener('DOMContentLoaded', function() {
+            highlightActiveSection();
+        });
+        
+        // Smooth scrolling for internal links
+        document.querySelectorAll('.nav-link').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
